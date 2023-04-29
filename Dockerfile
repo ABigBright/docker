@@ -19,7 +19,7 @@ RUN set -ex \
     && chmod +x /home/v2ray/v2ray.sh \
     && /home/v2ray/v2ray.sh "${TARGETPLATFORM}" "${TAG}" \
     # get the gosu binary
-    cpu_arch="amd64"; \
+    cpu_arch=$(echo $TARGETPLATFORM|awk -F '/' '{print $2}'); \
     curl -fLo /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$cpu_arch"; \
     curl -fLo /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$cpu_arch.asc"; \
     # verify the signature
